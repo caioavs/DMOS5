@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical"
+    android:padding="46dp">
+
+    <TextView
+        android:id="@+id/tvHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="65dp"
+        android:text="App"
+        android:fontFamily="@font/flux_regular"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        android:textColor="@color/black" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="35dp"
+        android:textColorHint="@color/brown_dark"
+        app:hintTextColor="@color/gray_light"
+        app:counterEnabled="true"
+        app:counterMaxLength="4">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etProntuario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="13dp"
+            android:inputType="number"
+            android:maxLength="4"
+            android:hint="prontuário"
+            android:fontFamily="@font/flux_regular"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.4"
+            android:textColor="@color/brown" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/btnAcessar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="175dp"
+        android:padding="15dp"
+        android:background="@drawable/custom_btn"
+        android:text="Acessar"
+        android:fontFamily="@font/choplin_medium"
+        android:textSize="18sp"
+        android:letterSpacing="0.2"
+        android:textColor="@color/white"
+        app:backgroundTint="@color/black" />
+
+    <TextView
+        android:id="@+id/txtCadastrar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/txtCadastrar"
+        android:fontFamily="@font/flux_regular"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:letterSpacing="0.2"
+        android:textColor="@color/brown_dark" />
+
+</LinearLayout>
