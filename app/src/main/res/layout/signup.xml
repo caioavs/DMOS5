@@ -61,6 +61,27 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="35dp"
         android:textColorHint="@color/brown_dark"
+        app:hintTextColor="@color/gray_light">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="13dp"
+            android:hint="e-mail"
+            android:fontFamily="@font/flux_regular"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.1"
+            android:textColor="@color/brown" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="35dp"
+        android:textColorHint="@color/brown_dark"
         app:hintTextColor="@color/gray_light"
         app:counterEnabled="true"
         app:counterMaxLength="11">

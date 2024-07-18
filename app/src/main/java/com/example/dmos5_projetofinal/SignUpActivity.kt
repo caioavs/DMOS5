@@ -7,6 +7,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.text.Html
+import android.util.Patterns
 import android.widget.*
 
 import androidx.appcompat.app.AppCompatActivity
@@ -26,11 +27,12 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun signUp() {
         val nome = findViewById<EditText>(R.id.etNome).text.toString()
+        val email = findViewById<EditText>(R.id.etEmail).text.toString()
         val cpf = findViewById<EditText>(R.id.etCpf).text.toString()
         val cargo = if (findViewById<RadioButton>(R.id.rbGarcom).isChecked) Role.GARCOM else Role.COZINHEIRO
 
         // Validação dos campos
-        if (nome.length < 3 || cpf.length != 11) {
+        if (nome.length < 3 || !validateEmail(email) || cpf.length != 11 ) {
             signalError(findViewById(R.id.tvHeader))
             return
         }
@@ -48,7 +50,7 @@ class SignUpActivity : AppCompatActivity() {
             .setMessage(Html.fromHtml("Guarde seu prontuário: <b>$prontuario</b>"))
             .setPositiveButton("OK") { _, _ ->
                 // Registra o funcionário
-                val employee = Employee(prontuario, nome, cpf, cargo)
+                val employee = Employee(prontuario, nome, email, cpf, cargo)
                 // Retorna para o SignIn
                 val intent = Intent(this, SignInActivity::class.java)
                 startActivity(intent)
@@ -59,6 +61,11 @@ class SignUpActivity : AppCompatActivity() {
     private fun returnToSignIn() {
         val intent = Intent(this, SignInActivity::class.java)
         startActivity(intent)
+        overridePendingTransition(R.transition.slide_in_left, R.transition.slide_out_right)
+    }
+
+    private fun validateEmail(email: String): Boolean {
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 
     private fun signalError(textView: TextView) {
