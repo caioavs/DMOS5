@@ -4,4 +4,5 @@
 
     <!--  Dialog reset password-->
     <string name="email">E-mail</string>
+    <string name="add_order">Novo Pedido</string>
 </resources>

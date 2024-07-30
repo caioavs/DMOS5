@@ -1,5 +1,6 @@
 package com.example.dmos5_projetofinal.model
 
+import java.io.Serializable
 import java.time.LocalDate
 import java.time.LocalTime
 
@@ -16,7 +17,7 @@ data class Order(
     var dataCriacao: LocalDate,
     var valor: Double,
     var isPago: Boolean
-) {
+) : Serializable {
     // Necessário para o Firebase Firestore
     constructor() : this("", 0, 0, 0, "", null, null, LocalTime.now(), null, LocalDate.now(), 0.0, false)
 
