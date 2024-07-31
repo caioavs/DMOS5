@@ -5,4 +5,30 @@
     <!--  Dialog reset password-->
     <string name="email">E-mail</string>
     <string name="add_order">Novo Pedido</string>
+
+
+    <!-- Menu -->
+    <string name="enter">Entrar</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_account">Minha Conta</string>
+    <string name="menu_new_activity">Nova Atividade</string>
+    <string name="menu_statistics">Estatísticas</string>
+    <string name="menu_ranking">Classificação</string>
+    <string name="menu_logout">Sair</string>
+    <string name="toggle_open">Abrir</string>
+    <string name="toggle_close">Fechar</string>
+    <string name="menu_my_orders">Meus pedidos</string>]
+
+
+    <!-- Profile -->
+    <string name="profile_cargo">Cargo</string>
+    <string name="profile_nome">nome</string>
+    <string name="profile_email">Email</string>
+    <string name="profile_prontuario">Prontuário</string>
+    <string name="profile_atualizar">Meus pedidos</string>
+    <array name="profile_cargo">
+        <item>Garçom</item>
+        <item>Cozinheiro</item>
+    </array>
+
 </resources>
