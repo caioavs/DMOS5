@@ -1,153 +1,59 @@
 package com.example.dmos5_projetofinal.repository
 
 import android.app.Application
-import android.preference.PreferenceManager
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.android.volley.toolbox.Volley
+import com.example.dmos5_projetofinal.model.Employee
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import org.json.JSONObject
 
-class UsersRepository (application: Application) {
+class UsersRepository {
 
-    private val firestore = FirebaseFirestore.getInstance()
+    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
+    private val firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
 
-    private val queue = Volley.newRequestQueue(application)
+    fun getLoggedEmployee(): LiveData<Employee?> {
+        val liveData = MutableLiveData<Employee?>()
+        val userId = auth.currentUser?.uid
 
-    private val preference = PreferenceManager.getDefaultSharedPreferences(application)
-
-    fun login(email: String, password: String) : LiveData<User> {
-
-        val liveData = MutableLiveData<User>(null)
-
-        val params = JSONObject().also {
-            it.put("email", email)
-            it.put("password", password)
-            it.put("returnSecureToken", true)
-        }
-
-        val request = JsonObjectRequest(
-            Request.Method.POST
-            , BASE_URL + SIGNIN + KEY
-            , params
-            , Response.Listener { response ->
-                val localId = response.getString("localId")
-                val idToken = response.getString("idToken")
-
-                firestore.collection("user")
-                    .document(localId).get().addOnSuccessListener {
-                        val user = it.toObject(User::class.java)
-                        user?.id = localId
-                        user?.password = idToken
-
-                        liveData.value = user!!
-
-                        preference.edit().putString(UserViewModel.USER_ID, localId).apply()
-
-                        firestore.collection("user")
-                            .document(localId).set(user!!)
-                    }
-            }
-            , Response.ErrorListener { error ->
-                Log.e(this.toString(), error.message ?: "Error")
-            }
-        )
-
-        queue.add(request)
-
-        return liveData
-    }
-
-    fun createUser(user: User) {
-
-        val params = JSONObject().also {
-            it.put("email", user.email)
-            it.put("password", user.password)
-            it.put("returnSecureToken", true)
-        }
-
-        val request = JsonObjectRequest(Request.Method.POST
-            , BASE_URL + SIGNUP + KEY
-            , params
-            , Response.Listener { response ->
-                user.id = response.getString("localId")
-                user.password = response.getString("idToken")
-
-                firestore.collection("user")
-                    .document(user.id).set(user).addOnSuccessListener {
-                        Log.d(this.toString(), "Usuário ${user.email} cadastrado com sucesso.")
-                    }
-            }
-            , Response.ErrorListener { error ->
-                Log.e(this.toString(), error.message ?: "Error")
-            }
-        )
-
-        queue.add(request)
-    }
-
-    fun load(userId: String) : LiveData<User> {
-        val liveData = MutableLiveData<User>()
-
-        val userRef = firestore.collection("user").document(userId)
-
-        userRef.get().addOnSuccessListener {
-            val user = it.toObject(User::class.java)
-            user?.id = it.id
-
-            liveData.value = user
+        if (userId != null) {
+            firestore.collection("employees").document(userId).get()
+                .addOnSuccessListener { document ->
+                    val employee = document.toObject(Employee::class.java)
+                    liveData.value = employee
+                }
+                .addOnFailureListener { _ ->
+                    liveData.value = null
+                }
+        } else {
+            liveData.value = null
         }
 
         return liveData
     }
 
+    fun login(email: String, password: String): LiveData<Employee?> {
+        val liveData = MutableLiveData<Employee?>()
 
-    fun update(user: User) : Boolean {
-
-        var updated = false
-
-        val userRef = firestore.collection("user").document(user.id)
-
-        userRef.set(user).addOnSuccessListener { updated = true }
-
-        return updated
-    }
-
-    fun resetPassword(email: String) {
-
-        val params = JSONObject().also {
-            it.put("email", email)
-            it.put("requestType", "PASSWORD_RESET")
-        }
-
-        val request = JsonObjectRequest(Request.Method.POST
-            , BASE_URL + PASSWORD_RESET + KEY
-            , params
-            , Response.Listener { response ->
-                Log.d(this.toString(), response.keys().toString())
+        auth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val user = auth.currentUser
+                    user?.let {
+                        firestore.collection("employees").document(it.uid).get()
+                            .addOnSuccessListener { document ->
+                                val loggedEmployee = document.toObject(Employee::class.java)
+                                liveData.value = loggedEmployee
+                            }
+                            .addOnFailureListener { _ ->
+                                liveData.value = null
+                            }
+                    }
+                } else {
+                    liveData.value = null
+                }
             }
-            , Response.ErrorListener { error ->
-                Log.e(this.toString(), error.message ?: "Error")
-            }
-        )
 
-        queue.add(request)
-
+        return liveData
     }
-
-    companion object {
-
-        const val BASE_URL = "https://identitytoolkit.googleapis.com/v1/"
-
-        const val SIGNUP = "accounts:signUp"
-
-        const val SIGNIN = "accounts:signInWithPassword"
-
-        const val PASSWORD_RESET = "accounts:sendOobCode"
-
-        const val KEY = "?key=AIzaSyCirVFi3hl81YuPT1U1VNJcFJXMkOuw1Tk" // pegar nas Configurações do Projeto no Firebase - valor parecido com AIzaSyBxFjit4FD8NN5Mx8hTFQQxeVA1Pv2OUag
-
-    }
-
 }

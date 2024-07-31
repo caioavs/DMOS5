@@ -1,56 +1,49 @@
 package com.example.dmos5_projetofinal
 
-import android.animation.ArgbEvaluator
-import android.animation.ObjectAnimator
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
 
 class SignInActivity : AppCompatActivity() {
 
+    private lateinit var auth: FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.signin)
+        setContentView(R.layout.signin) // Atualize aqui para usar signin.xml
 
-        val btnAcessar : Button = findViewById(R.id.btnAcessar)
-        btnAcessar.setOnClickListener { signIn() }
+        auth = FirebaseAuth.getInstance()
 
-        val txtCadastrar : TextView = findViewById(R.id.txtCadastrar)
-        txtCadastrar.setOnClickListener { signUp() }
-    }
+        val emailEditText: EditText = findViewById(R.id.etEmail)
+        val passwordEditText: EditText = findViewById(R.id.etPassword)
+        val signInButton: Button = findViewById(R.id.btnAcessar)
+        val signUpTextView: TextView = findViewById(R.id.txtCadastrar)
 
-    private fun signIn() {
-        val prontuario = findViewById<EditText>(R.id.etProntuario).text.toString()
+        signInButton.setOnClickListener {
+            val email = emailEditText.text.toString()
+            val password = passwordEditText.text.toString()
 
-        // Validação do campo
-        if (prontuario.length !=4) {
-            signalError(findViewById(R.id.tvHeader))
-            return
+            auth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this) { task ->
+                    if (task.isSuccessful) {
+                        // Login successful
+                        val intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        // TODO: handle login failure
+                    }
+                }
+        }
+
+        signUpTextView.setOnClickListener {
+            val intent = Intent(this, SignUpActivity::class.java)
+            startActivity(intent)
         }
     }
-
-    private fun signUp() {
-        val intent = Intent(this, SignUpActivity::class.java)
-        startActivity(intent)
-    }
-
-    private fun signalError(textView: TextView) {
-        val animator = ObjectAnimator.ofObject(
-            textView,
-            "textColor",
-            ArgbEvaluator(),
-            textView.currentTextColor,
-            Color.parseColor("#ff4e5f")
-        )
-        animator.duration = 700
-        animator.repeatMode = ObjectAnimator.REVERSE
-        animator.repeatCount = 1
-        animator.start()
-    }
-
 }

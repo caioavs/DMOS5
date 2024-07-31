@@ -1,7 +1,5 @@
 package com.example.dmos5_projetofinal
 
-import android.animation.ArgbEvaluator
-import android.animation.ObjectAnimator
 import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.Color
@@ -12,6 +10,8 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import android.animation.ArgbEvaluator
+import android.animation.ObjectAnimator
 
 class SignUpActivity : AppCompatActivity() {
 
@@ -81,6 +81,7 @@ class SignUpActivity : AppCompatActivity() {
                             }
                             .addOnFailureListener { e ->
                                 // Handle error
+                                e.printStackTrace()
                                 Toast.makeText(this, "Erro ao salvar dados do usuário", Toast.LENGTH_SHORT).show()
                             }
                     } else {
@@ -90,6 +91,7 @@ class SignUpActivity : AppCompatActivity() {
                 }
         }.addOnFailureListener { e ->
             // Handle transaction failure
+            e.printStackTrace()
             Toast.makeText(this, "Erro ao gerar prontuário", Toast.LENGTH_SHORT).show()
         }
     }

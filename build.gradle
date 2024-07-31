@@ -1,5 +1,18 @@
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:8.2.0"  // Atualize para a versão AGP compatível
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.0"  // Atualize se necessário
+    }
+}
+
 plugins {
-    alias(libs.plugins.androidApplication) apply false
-    alias(libs.plugins.jetbrainsKotlinAndroid) apply false
     id("com.google.gms.google-services") version "4.4.2" apply false
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
 }

@@ -4,4 +4,11 @@
 
     <!--  Dialog reset password-->
     <string name="email">E-mail</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_account">Minha Conta</string>
+    <string name="menu_my_orders">Meus Pedidos</string>
+    <string name="menu_statistics">Estatisticas</string>
+    <string name="menu_logout">Sair</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>
