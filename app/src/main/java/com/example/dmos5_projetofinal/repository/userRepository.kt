@@ -31,7 +31,6 @@ class UsersRepository {
 
         return liveData
     }
-
     fun login(email: String, password: String): LiveData<Employee?> {
         val liveData = MutableLiveData<Employee?>()
 
@@ -39,8 +38,8 @@ class UsersRepository {
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     val user = auth.currentUser
-                    user?.let {
-                        firestore.collection("employees").document(it.uid).get()
+                    if (user != null) {
+                        firestore.collection("employees").document(user.uid).get()
                             .addOnSuccessListener { document ->
                                 val loggedEmployee = document.toObject(Employee::class.java)
                                 liveData.value = loggedEmployee
@@ -48,6 +47,8 @@ class UsersRepository {
                             .addOnFailureListener { _ ->
                                 liveData.value = null
                             }
+                    } else {
+                        liveData.value = null
                     }
                 } else {
                     liveData.value = null
