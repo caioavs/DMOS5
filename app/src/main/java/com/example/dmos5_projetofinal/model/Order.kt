@@ -1,33 +1,21 @@
 package com.example.dmos5_projetofinal.model
 
-import java.time.LocalDate
-import java.time.LocalTime
+import java.util.Date
 
 data class Order(
-    var id: String,
-    var orderId: Int,
-    var garcomId: Int,
-    var cozinheiroId: Int,
-    var nomeCliente: String,
-    var status: Status?,
-    var itens: ArrayList<Item>?,
-    var inicioPedido: LocalTime,
-    var finalPedido: LocalTime?,
-    var dataCriacao: LocalDate,
-    var valor: Double,
-    var isPago: Boolean
+    var id: String = "",
+    var pratoPrincipal: Item? = null,
+    var pratoAdicional: Item? = null,
+    var bebida: Item? = null,
+    var prontuarioUsuario: String = "",
+    var observacoes: String = "", // Adicionado campo de observação
+    var status: Status? = null,
+    var dataCriacao: Date = Date() // Usando java.util.Date
 ) {
-    // Necessário para o Firebase Firestore
-    constructor() : this("", 0, 0, 0, "", null, null, LocalTime.now(), null, LocalDate.now(), 0.0, false)
-
     enum class Status {
-        ANOTADO,
-        PRODUZINDO,
+        EM_ANDAMENTO,
+        PRONTO,
         CONCLUIDO,
-        PARADO,
         CANCELADO
     }
 }
-
-
-
