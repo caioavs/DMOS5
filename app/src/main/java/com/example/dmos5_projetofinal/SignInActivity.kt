@@ -1,6 +1,9 @@
 package com.example.dmos5_projetofinal
 
+import android.animation.ArgbEvaluator
+import android.animation.ObjectAnimator
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -14,36 +17,52 @@ class SignInActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.signin) // Atualize aqui para usar signin.xml
+        setContentView(R.layout.signin)
 
         auth = FirebaseAuth.getInstance()
 
-        val emailEditText: EditText = findViewById(R.id.etEmail)
-        val passwordEditText: EditText = findViewById(R.id.etPassword)
-        val signInButton: Button = findViewById(R.id.btnAcessar)
-        val signUpTextView: TextView = findViewById(R.id.txtCadastrar)
+        val signInButton: Button = findViewById(R.id.btnSignIn)
+        signInButton.setOnClickListener { signIn() }
 
-        signInButton.setOnClickListener {
-            val email = emailEditText.text.toString()
-            val password = passwordEditText.text.toString()
+        val signUpTextView: TextView = findViewById(R.id.txtSignUp)
+        signUpTextView.setOnClickListener { signUp() }
+    }
 
-            auth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this) { task ->
-                    if (task.isSuccessful) {
-                        // Login successful
-                        val intent = Intent(this, MainActivity::class.java)
-                        startActivity(intent)
-                        finish()
-                    } else {
-                        // If sign in fails, display a message to the user.
-                        // TODO: handle login failure
-                    }
+    private fun signIn() {
+        val email = findViewById<EditText>(R.id.etEmail).text.toString()
+        val senha = findViewById<EditText>(R.id.etSenha).text.toString()
+        if (email.isNotEmpty() && senha.isNotEmpty()) {
+            auth.signInWithEmailAndPassword(email, senha).addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                } else {
+                    signalError(findViewById(R.id.tvHeader))
                 }
-        }
-
-        signUpTextView.setOnClickListener {
-            val intent = Intent(this, SignUpActivity::class.java)
-            startActivity(intent)
+            }
+        } else {
+            signalError(findViewById(R.id.tvHeader))
         }
     }
+
+    private fun signalError(textView: TextView) {
+        val animator = ObjectAnimator.ofObject(
+            textView,
+            "textColor",
+            ArgbEvaluator(),
+            textView.currentTextColor,
+            Color.parseColor("#ff4e5f")
+        )
+        animator.duration = 700
+        animator.repeatMode = ObjectAnimator.REVERSE
+        animator.repeatCount = 1
+        animator.start()
+    }
+
+    private fun signUp() {
+        val intent = Intent(this, SignUpActivity::class.java)
+        startActivity(intent)
+    }
+
 }
