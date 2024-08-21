@@ -7,14 +7,15 @@ data class Order(
     var pratoPrincipal: Item? = null,
     var pratoAdicional: Item? = null,
     var bebida: Item? = null,
-    var prontuarioUsuario: String = "",
-    var observacoes: String = "", // Adicionado campo de observação
+    var observacoes: String = "",
     var status: Status? = null,
-    var dataCriacao: Date = Date() // Usando java.util.Date
+    var dt: Date = Date(),
+    var prontuarioEmployee: String = ""
 ) {
     enum class Status {
+        EM_ESPERA,
         EM_ANDAMENTO,
-        PRONTO,
+        PRONTO_PARA_RETIRADA,
         CONCLUIDO,
         CANCELADO
     }

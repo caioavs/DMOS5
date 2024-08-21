@@ -1,25 +1,26 @@
-package com.example.dmos5_projetofinal
+package com.example.dmos5_projetofinal.ui
 
 import android.os.Bundle
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.TextView
+import android.widget.FrameLayout
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import com.google.android.material.navigation.NavigationView
-import androidx.appcompat.widget.Toolbar
-import android.view.MenuItem
-import android.widget.FrameLayout
-import com.example.dmos5_projetofinal.model.Order
-import com.example.dmos5_projetofinal.model.Item
-import com.example.dmos5_projetofinal.model.ItemDataInitializer
-import com.google.firebase.firestore.FirebaseFirestore
+import com.example.dmos5_projetofinal.R
 import java.text.SimpleDateFormat
 import java.util.*
+import com.google.android.material.navigation.NavigationView
+import com.google.firebase.firestore.FirebaseFirestore
+import com.example.dmos5_projetofinal.model.Order
+import com.example.dmos5_projetofinal.model.Item
+import com.example.dmos5_projetofinal.data.ItemDataInitializer
 
-class MainActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity() {
 
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navigationView: NavigationView
@@ -31,25 +32,21 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.home)
 
-        // Inicializando componentes
         drawerLayout = findViewById(R.id.drawer_layout)
         navigationView = findViewById(R.id.nav_view)
         toolbar = findViewById(R.id.toolbar)
+
         buttonNewOrder = findViewById(R.id.button_new_order)
         buttonChangeStatus = findViewById(R.id.button_change_status)
 
-        // Configurando a Toolbar
         setSupportActionBar(toolbar)
 
-        // Configurando o Firestore
         firestore = FirebaseFirestore.getInstance()
 
-        // Inicializar itens no Firestore, se necessário
-        initializeItemsIfNeeded()
+        initializeItems()
 
-        // Configurando o NavigationView
         navigationView.setNavigationItemSelectedListener { menuItem ->
             handleNavigation(menuItem)
             true
@@ -59,10 +56,8 @@ class MainActivity : AppCompatActivity() {
             drawerLayout.openDrawer(GravityCompat.START)
         }
 
-        // Configurando o content_frame para exibir a lista de pedidos
         setupContentFrame()
 
-        // Configurando eventos dos botões
         buttonNewOrder.setOnClickListener {
             // Lógica para novo pedido
         }
@@ -72,12 +67,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun initializeItemsIfNeeded() {
+    private fun initializeItems() {
         val itemsCollection = firestore.collection("items")
         itemsCollection.get().addOnSuccessListener { result ->
-            if (result.isEmpty) {
+            if(result.isEmpty) {
                 val initialItems = ItemDataInitializer.getInitialItems()
-                for (item in initialItems) {
+                for(item in initialItems) {
                     itemsCollection.document(item.id).set(item)
                         .addOnSuccessListener {
                             // Item adicionado com sucesso
@@ -103,14 +98,12 @@ class MainActivity : AppCompatActivity() {
 
         frameLayout.addView(scrollView)
 
-        // Exibindo pedidos
         displayOrders()
     }
 
     private fun displayOrders() {
         val orders = getOrdersFromDatabase()
-
-        for (order in orders) {
+        for(order in orders) {
             val orderView = createOrderView(order)
             contentFrame.addView(orderView)
         }
@@ -121,7 +114,6 @@ class MainActivity : AppCompatActivity() {
             orientation = LinearLayout.VERTICAL
             setPadding(16, 16, 16, 16)
         }
-
         val orderIdTextView = TextView(this).apply {
             text = "Pedido ID: ${order.id}"
             textSize = 16f
@@ -147,7 +139,7 @@ class MainActivity : AppCompatActivity() {
             textSize = 16f
         }
         val creationDateTextView = TextView(this).apply {
-            text = "Data: ${SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(order.dataCriacao)}"
+            text = "Data: ${SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(order.dt)}"
             textSize = 16f
         }
 
@@ -163,40 +155,36 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getOrdersFromDatabase(): List<Order> {
-        // Simulação de pedidos para exibição
         return listOf(
             Order(
                 id = "1",
-                pratoPrincipal = Item("item1", Item.FoodType.PRATO_PRINCIPAL, "Prato Principal Teste", 20.0),
-                pratoAdicional = Item("item2", Item.FoodType.PRATO_ADICIONAL, "Adicional Teste", 10.0),
-                bebida = Item("item3", Item.FoodType.BEBIDA, "Bebida Teste", 5.0),
-                prontuarioUsuario = "1001",
+                pratoPrincipal = Item("item1", Item.ItemType.PRATO_PRINCIPAL, "Prato Principal Teste", 20.0),
+                pratoAdicional = Item("item2", Item.ItemType.PRATO_ADICIONAL, "Adicional Teste", 10.0),
+                bebida = Item("item3", Item.ItemType.BEBIDA, "Bebida Teste", 5.0),
+                observacoes = "Observação Teste",
                 status = Order.Status.EM_ANDAMENTO,
-                dataCriacao = Date(), // Usando a data atual
-                observacoes = "Observação Teste"
+                dt = Date(),
+                prontuarioEmployee = "1001"
             )
         )
     }
 
     private fun handleNavigation(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.nav_home -> {
-                // Lógica para navegar para a tela principal
+        when(item.itemId) {
+            R.id.navHome -> {
+                // Lógica para navegar para a home
             }
-            R.id.nav_account -> {
-                // Lógica para navegar para a tela de conta
-            }
-            // Adicione outras opções conforme necessário
         }
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
     }
 
     override fun onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+        if(drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START)
         } else {
             super.onBackPressed()
         }
     }
+
 }

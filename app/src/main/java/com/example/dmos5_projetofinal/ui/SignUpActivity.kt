@@ -1,4 +1,4 @@
-package com.example.dmos5_projetofinal
+package com.example.dmos5_projetofinal.ui
 
 import android.app.AlertDialog
 import android.content.Intent
@@ -10,6 +10,7 @@ import android.widget.*
 import android.animation.ArgbEvaluator
 import android.animation.ObjectAnimator
 import androidx.appcompat.app.AppCompatActivity
+import com.example.dmos5_projetofinal.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 

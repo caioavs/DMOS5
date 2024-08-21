@@ -6,7 +6,7 @@ data class Employee(
     var email: String,
     var cpf: String,
     var cargo: Role?
-    ) {
+) {
     constructor() : this(0, "", "", "", null)
     enum class Role {
         GARCOM,

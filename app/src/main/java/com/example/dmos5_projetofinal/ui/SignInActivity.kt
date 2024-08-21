@@ -1,4 +1,4 @@
-package com.example.dmos5_projetofinal
+package com.example.dmos5_projetofinal.ui
 
 import android.animation.ArgbEvaluator
 import android.animation.ObjectAnimator
@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.dmos5_projetofinal.R
 import com.google.firebase.auth.FirebaseAuth
 
 class SignInActivity : AppCompatActivity() {
@@ -34,7 +35,7 @@ class SignInActivity : AppCompatActivity() {
         if (email.isNotEmpty() && senha.isNotEmpty()) {
             auth.signInWithEmailAndPassword(email, senha).addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    val intent = Intent(this, MainActivity::class.java)
+                    val intent = Intent(this, HomeActivity::class.java)
                     startActivity(intent)
                     finish()
                 } else {

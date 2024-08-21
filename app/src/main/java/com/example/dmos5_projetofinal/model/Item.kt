@@ -4,14 +4,12 @@ import com.google.firebase.firestore.DocumentId
 
 data class Item(
     @DocumentId var id: String,
-    var tipo: FoodType?,
+    var tipo: ItemType?,
     var descricao: String,
     var valor: Double
 ) {
-    // Necessário para o Firebase Firestore
     constructor() : this("", null, "", 0.0)
-
-    enum class FoodType {
+    enum class ItemType {
         PRATO_PRINCIPAL,
         PRATO_ADICIONAL,
         BEBIDA
