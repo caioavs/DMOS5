@@ -20,13 +20,26 @@ class OrderAdapter(private val context: Context, private val orders: List<Order>
     }
 
     private fun bindOrder(view: View, order: Order) {
-        view.findViewById<TextView>(R.id.tvId).text = "#${order.id}"
-        view.findViewById<TextView>(R.id.tvPratoPrincipal).text = "Prato principal: ${order.pratoPrincipal?.descricao ?: "N/A"}"
-        view.findViewById<TextView>(R.id.tvPratoAdicional).text = "Prato adicional: ${order.pratoAdicional?.descricao ?: "N/A"}"
-        view.findViewById<TextView>(R.id.tvBebida).text = "Bebida: ${order.bebida?.descricao ?: "N/A"}"
-        view.findViewById<TextView>(R.id.tvObservacoes).text = "Observações: ${order.observacoes}"
-        view.findViewById<TextView>(R.id.tvStatus).text = "Status: ${order.status}"
-        view.findViewById<TextView>(R.id.tvDt).text = "${order.dt}"
+        val id = view.findViewById<TextView>(R.id.tvId)
+        id.text = "${id.text}${order.id}"
+
+        val pratoPrincipal = view.findViewById<TextView>(R.id.tvPratoPrincipal)
+        pratoPrincipal.text = "${pratoPrincipal.text}${order.pratoPrincipal?.descricao}"
+
+        val pratoAdicional = view.findViewById<TextView>(R.id.tvPratoAdicional)
+        pratoAdicional.text = "${pratoAdicional.text}${order.pratoAdicional?.descricao}"
+
+        val bebida = view.findViewById<TextView>(R.id.tvBebida)
+        bebida.text = "${bebida.text}${order.bebida?.descricao}"
+
+        val observacoes = view.findViewById<TextView>(R.id.tvObservacoes)
+        observacoes.text = "${observacoes.text}${order.observacoes}"
+
+        val status = view.findViewById<TextView>(R.id.tvStatus)
+        status.text = "${status.text}${order.status}"
+
+        val dt = view.findViewById<TextView>(R.id.tvDt)
+        dt.text = "${dt.text}${order.dt}"
     }
 
 }
