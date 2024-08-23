@@ -8,13 +8,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import java.util.*
 import com.example.dmos5_projetofinal.R
 import com.example.dmos5_projetofinal.adapter.OrderAdapter
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.firestore.FirebaseFirestore
 import com.example.dmos5_projetofinal.model.Order
 import com.example.dmos5_projetofinal.model.Item
+import java.util.*
 
 class HomeActivity : AppCompatActivity() {
 

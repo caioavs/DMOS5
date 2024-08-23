@@ -7,6 +7,8 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.example.dmos5_projetofinal.R
 import com.example.dmos5_projetofinal.model.Order
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class OrderAdapter(private val context: Context, private val orders: List<Order>, private val container: LinearLayout) {
 
@@ -36,10 +38,14 @@ class OrderAdapter(private val context: Context, private val orders: List<Order>
         observacoes.text = "${observacoes.text}${order.observacoes}"
 
         val status = view.findViewById<TextView>(R.id.tvStatus)
-        status.text = "${status.text}${order.status}"
+        status.text = order.status?.name
+            ?.replace("_", " ")
+            ?.lowercase()
+            ?.replaceFirstChar { it.uppercase() }
 
         val dt = view.findViewById<TextView>(R.id.tvDt)
-        dt.text = "${dt.text}${order.dt}"
+        val dtFormat = SimpleDateFormat("EEEE, dd/MM/yyyy", Locale("pt", "BR"))
+        dt.text = dtFormat.format(order.dt)
     }
 
 }
