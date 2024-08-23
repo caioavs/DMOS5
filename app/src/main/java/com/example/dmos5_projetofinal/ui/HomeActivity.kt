@@ -11,6 +11,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.example.dmos5_projetofinal.R
 import com.example.dmos5_projetofinal.adapter.OrderAdapter
 import com.google.android.material.navigation.NavigationView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.firestore.FirebaseFirestore
 import com.example.dmos5_projetofinal.model.Order
 import com.example.dmos5_projetofinal.model.Item
@@ -34,6 +35,9 @@ class HomeActivity : AppCompatActivity() {
         setDrawerLayout()
         setNavigationView()
         setAdapter()
+
+        val newOrderButton: FloatingActionButton = findViewById(R.id.btnNewOrder)
+        newOrderButton.setOnClickListener { newOrder() }
     }
 
     private fun setToolbar() {
@@ -91,6 +95,11 @@ class HomeActivity : AppCompatActivity() {
                 prontuarioEmployee = "1001"
             )
         )
+    }
+
+    private fun newOrder() {
+        val intent = Intent(this, NewOrderActivity::class.java)
+        startActivity(intent)
     }
 
 }
