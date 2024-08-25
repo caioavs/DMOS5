@@ -33,7 +33,7 @@ class EmployeeRepository {
         val liveData = MutableLiveData<Employee?>()
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
+                if(task.isSuccessful) {
                     val user = auth.currentUser
                     if(user != null) {
                         firestore.collection("employees").document(user.uid).get()

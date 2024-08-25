@@ -3,6 +3,7 @@ package com.example.dmos5_projetofinal.data
 import com.example.dmos5_projetofinal.model.Item
 
 object ItemDataInitializer {
+
     fun getInitialItems(): List<Item> {
         return listOf(
             // Pratos principais
@@ -20,4 +21,5 @@ object ItemDataInitializer {
             Item("bb_4", Item.ItemType.BEBIDA, "Coca-Cola lata", 6.0)
         )
     }
+
 }

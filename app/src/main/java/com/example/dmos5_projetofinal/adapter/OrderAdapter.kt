@@ -26,26 +26,26 @@ class OrderAdapter(private val context: Context, private val orders: List<Order>
         id.text = "${id.text}${order.id}"
 
         val pratoPrincipal = view.findViewById<TextView>(R.id.tvPratoPrincipal)
-        pratoPrincipal.text = "${pratoPrincipal.text}${order.pratoPrincipal?.descricao}"
+        pratoPrincipal.text = "${order.pratoPrincipal?.descricao}"
 
         val pratoAdicional = view.findViewById<TextView>(R.id.tvPratoAdicional)
-        pratoAdicional.text = "${pratoAdicional.text}${order.pratoAdicional?.descricao}"
+        pratoAdicional.text = "${order.pratoAdicional?.descricao}"
 
         val bebida = view.findViewById<TextView>(R.id.tvBebida)
-        bebida.text = "${bebida.text}${order.bebida?.descricao}"
+        bebida.text = "${order.bebida?.descricao}"
 
         val observacoes = view.findViewById<TextView>(R.id.tvObservacoes)
-        observacoes.text = "${observacoes.text}${order.observacoes}"
+        observacoes.text = "${order.observacoes}"
 
-        val status = view.findViewById<TextView>(R.id.tvStatus)
-        status.text = order.status?.name
-            ?.replace("_", " ")
-            ?.lowercase()
-            ?.replaceFirstChar { it.uppercase() }
-
+//        val status = view.findViewById<TextView>(R.id.tvStatus)
+//        status.text = order.status?.name
+//            ?.replace("_", " ")
+//            ?.lowercase()
+//            ?.replaceFirstChar { it.uppercase() }
+//
         val dt = view.findViewById<TextView>(R.id.tvDt)
-        val dtFormat = SimpleDateFormat("EEEE, dd/MM/yyyy", Locale("pt", "BR"))
-        dt.text = dtFormat.format(order.dt)
+        val dtFormat = SimpleDateFormat("EEEE, dd/MM/yy HH:mm", Locale("pt", "BR"))
+        dt.text = "${dt.text}${dtFormat.format(order.dt)}"
     }
 
 }

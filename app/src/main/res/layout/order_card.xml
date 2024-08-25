@@ -1,49 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:padding="16dp">
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="25dp"
+    card_view:cardElevation="7dp"
+    card_view:cardCornerRadius="8dp"
+    card_view:cardBackgroundColor="@color/brown_strong_dark">
 
-    <TextView
-            android:id="@+id/tvId"
-            android:layout_width="wrap_content"
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="26dp">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="#" />
+            android:layout_marginBottom="10dp">
 
-    <TextView
-            android:id="@+id/tvPratoPrincipal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Principal - " />
+            <TextView
+                android:id="@+id/tvId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="#"
+                android:textSize="13sp"
+                android:textColor="@color/brown_light" />
 
-    <TextView
-            android:id="@+id/tvPratoAdicional"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Adicional - " />
+            <TextView
+                android:id="@+id/tvDt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  •  "
+                android:textSize="13sp"
+                android:textColor="@color/brown_light" />
 
-    <TextView
-            android:id="@+id/tvBebida"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Bebida - " />
+        </LinearLayout>
 
-    <TextView
-            android:id="@+id/tvObservacoes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Observações: " />
+        <TextView
+                android:id="@+id/tvPratoPrincipal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:text="Placeholder"
+                android:fontFamily="@font/flux_regular"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:textColor="@color/yellow" />
 
-    <TextView
-            android:id="@+id/tvStatus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Status - " />
+        <TextView
+                android:id="@+id/tvPratoAdicional"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="25dp"
+                android:padding="10dp"
+                android:background="@drawable/custom_bg"
+                android:text="Placeholder"
+                android:fontFamily="@font/flux_regular"
+                android:textSize="20sp"
+                android:textColor="@color/beige" />
 
-    <TextView
-            android:id="@+id/tvDt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <TextView
+                android:id="@+id/tvBebida"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:padding="10dp"
+                android:background="@drawable/custom_bg_alt"
+                android:text="Placeholder"
+                android:fontFamily="@font/flux_regular"
+                android:textSize="20sp"
+                android:textColor="@color/brown_strong" />
 
-</LinearLayout>
+        <TextView
+                android:id="@+id/tvObservacoes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Placeholder"
+                android:fontFamily="@font/flux_regular"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/brown_light" />
+
+<!--        <TextView-->
+<!--                android:id="@+id/tvStatus"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content" />-->
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

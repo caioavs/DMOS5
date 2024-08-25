@@ -90,12 +90,6 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
-    private fun returnToSignIn() {
-        val intent = Intent(this, SignInActivity::class.java)
-        startActivity(intent)
-        overridePendingTransition(R.transition.slide_in_left, R.transition.slide_out_right)
-    }
-
     private fun validateEmail(email: String): Boolean {
         return Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
@@ -112,6 +106,12 @@ class SignUpActivity : AppCompatActivity() {
         animator.repeatMode = ObjectAnimator.REVERSE
         animator.repeatCount = 1
         animator.start()
+    }
+
+    private fun returnToSignIn() {
+        val intent = Intent(this, SignInActivity::class.java)
+        startActivity(intent)
+        overridePendingTransition(R.transition.slide_in_left, R.transition.slide_out_right)
     }
 
 }
