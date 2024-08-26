@@ -2,6 +2,8 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/orderCard"
+    android:clickable="true"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="25dp"
@@ -15,16 +17,17 @@
         android:layout_height="wrap_content"
         android:padding="26dp">
 
-        <LinearLayout
+        <RelativeLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="5dp">
 
             <TextView
                 android:id="@+id/tvId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+
                 android:text="#"
                 android:textSize="13sp"
                 android:textColor="@color/brown_light" />
@@ -33,22 +36,45 @@
                 android:id="@+id/tvDt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
                 android:text="  •  "
                 android:textSize="13sp"
                 android:textColor="@color/brown_light" />
 
-        </LinearLayout>
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/edit_order" />
 
-        <TextView
-                android:id="@+id/tvPratoPrincipal"
+        </RelativeLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp">
+
+            <TextView
+                android:id="@+id/tvStatusLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="30dp"
-                android:text="Placeholder"
+                android:text="• "
                 android:fontFamily="@font/flux_regular"
                 android:textSize="25sp"
-                android:textStyle="bold"
-                android:textColor="@color/yellow" />
+                android:textStyle="bold" />
+
+            <TextView
+                    android:id="@+id/tvPratoPrincipal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Placeholder"
+                    android:fontFamily="@font/flux_regular"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/yellow_orange" />
+
+        </LinearLayout>
 
         <TextView
                 android:id="@+id/tvPratoAdicional"

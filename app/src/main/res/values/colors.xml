@@ -10,8 +10,11 @@
     <color name="black">#FF000000</color>
     <color name="gray_light">#FFAAAAAA</color>
     <color name="gray_dark">#494949</color>
+    <color name="blue_light">#6F8ABD</color>
+    <color name="green">#23c17c</color>
     <color name="red">#ff4e5f</color>
-    <color name="yellow">#ECA335</color>
+    <color name="yellow">#e0b81f</color>
+    <color name="yellow_orange">#ECA335</color>
     <color name="beige">#fffcf3</color>
     <color name="brown_lighter">#CCC5B7</color>
     <color name="brown_light">#AAA293</color>
