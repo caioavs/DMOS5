@@ -4,9 +4,12 @@ import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.Spinner
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import com.example.dmos5_projetofinal.R
 import com.example.dmos5_projetofinal.model.Order
@@ -22,8 +25,10 @@ class OrderAdapter(private val context: Context, private val orders: List<Order>
             val itemView = inflater.inflate(R.layout.order_card, container, false)
 
             editOrder(itemView)
-
+            setSpinnerStatus(itemView, order)
             setStatusLabel(itemView, order)
+            setButtons(itemView, order)
+            setVisibility(itemView, order)
 
             bindOrder(itemView, order)
             container.addView(itemView)
@@ -46,22 +51,43 @@ class OrderAdapter(private val context: Context, private val orders: List<Order>
         val observacoes = view.findViewById<TextView>(R.id.tvObservacoes)
         observacoes.text = "${order.observacoes}"
 
-//        val status = view.findViewById<TextView>(R.id.tvStatus)
-//        status.text = order.status?.name
-//            ?.replace("_", " ")
-//            ?.lowercase()
-//            ?.replaceFirstChar { it.uppercase() }
-//
         val dt = view.findViewById<TextView>(R.id.tvDt)
         val dtFormat = SimpleDateFormat("EEEE, dd/MM/yy HH:mm", Locale("pt", "BR"))
         dt.text = "${dt.text}${dtFormat.format(order.dt)}"
+
+        val status = view.findViewById<TextView>(R.id.tvStatus)
+        status.text = "${status.text}${order.status}"
+        status.text = order.status?.name
+            ?.replace("_", " ")
+            ?.lowercase()
+            ?.replaceFirstChar { it.uppercase() }
     }
 
     private fun editOrder(itemView: View) {
-        val cardView: CardView = itemView.findViewById(R.id.orderCard)
-        cardView.setOnClickListener {
-            val intent = Intent(context, NewOrderActivity::class.java)
-            context.startActivity(intent)
+        val imageView: ImageView = itemView.findViewById(R.id.ImgEditOrder)
+        imageView.setOnClickListener {
+            val intent = Intent(itemView.context, NewOrderActivity::class.java)
+            itemView.context.startActivity(intent)
+        }
+    }
+
+    private fun setSpinnerStatus(itemView: View, order: Order) {
+        val spinner: Spinner = itemView.findViewById(R.id.spinnerStatus)
+
+        val filteredStatusValues = Order.Status.values()
+            .filter { it != Order.Status.CONCLUIDO && it != Order.Status.CANCELADO }
+            .map { it.name.replace("_", " ").lowercase().replaceFirstChar { char -> char.uppercase() } }
+
+        val adapter = ArrayAdapter(context, R.layout.spinner_item, filteredStatusValues)
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown)
+        spinner.adapter = adapter
+
+        order.status?.let { status ->
+            val statusString = status.name.replace("_", " ").lowercase().replaceFirstChar { char -> char.uppercase() }
+            val position = filteredStatusValues.indexOf(statusString)
+            if(position >= 0) {
+                spinner.setSelection(position)
+            }
         }
     }
 
@@ -73,6 +99,35 @@ class OrderAdapter(private val context: Context, private val orders: List<Order>
             Order.Status.PRONTO_PARA_RETIRADA -> tvStatusLabel.setTextColor(ContextCompat.getColor(context, R.color.yellow))
             Order.Status.CONCLUIDO -> tvStatusLabel.setTextColor(ContextCompat.getColor(context, R.color.green))
             else -> tvStatusLabel.setTextColor(ContextCompat.getColor(context, R.color.red))
+        }
+    }
+
+    private fun setButtons(itemView: View, order: Order) {
+        val cancelOrderButton: Button = itemView.findViewById(R.id.btnCancelOrder)
+        cancelOrderButton.setOnClickListener {  }
+
+        val concludeOrderButton: Button = itemView.findViewById(R.id.btnConcludeOrder)
+        concludeOrderButton.setOnClickListener {  }
+    }
+
+    private fun setVisibility(itemView: View?, order: Order) {
+        itemView?.let { view ->
+            val status = view.findViewById<TextView>(R.id.tvStatus)
+            if(order.status == Order.Status.CONCLUIDO || order.status == Order.Status.CANCELADO) {
+                val imageView: ImageView = view.findViewById(R.id.ImgEditOrder)
+                val spinner: Spinner = view.findViewById(R.id.spinnerStatus)
+                val cancelOrderButton: Button = view.findViewById(R.id.btnCancelOrder)
+                val concludeOrderButton: Button = view.findViewById(R.id.btnConcludeOrder)
+
+                imageView.visibility = View.GONE
+                spinner.visibility = View.GONE
+                cancelOrderButton.visibility = View.GONE
+                concludeOrderButton.visibility = View.GONE
+
+                status.visibility = View.VISIBLE
+            } else {
+                status.visibility = View.GONE
+            }
         }
     }
 

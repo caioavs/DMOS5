@@ -117,7 +117,7 @@ class HomeActivity : AppCompatActivity() {
                 pratoAdicional = Item("item5", Item.ItemType.PRATO_ADICIONAL, "Outro Prato Adicional", 12.0),
                 bebida = Item("item6", Item.ItemType.BEBIDA, "Outra Bebida", 6.0),
                 observacoes = "Outra Observação",
-                status = Order.Status.EM_ANDAMENTO,
+                status = Order.Status.CANCELADO,
                 dt = Date(),
                 prontuarioEmployee = "1002"
             )

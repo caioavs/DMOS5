@@ -12,6 +12,7 @@
     <color name="gray_dark">#494949</color>
     <color name="blue_light">#6F8ABD</color>
     <color name="green">#23c17c</color>
+    <color name="green_dark">#136A44</color>
     <color name="red">#ff4e5f</color>
     <color name="yellow">#e0b81f</color>
     <color name="yellow_orange">#ECA335</color>
@@ -20,6 +21,7 @@
     <color name="brown_light">#AAA293</color>
     <color name="brown">#8A816F</color>
     <color name="brown_dark">#423D32</color>
+    <color name="brown_strong_light">#573A2C</color>
     <color name="brown_strong">#4e3224</color>
     <color name="brown_strong_dark">#412E26</color>
 </resources>
