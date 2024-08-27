@@ -16,7 +16,7 @@ data class Order(
         EM_ESPERA,
         EM_ANDAMENTO,
         PRONTO_PARA_RETIRADA,
-        CONCLUIDO,
+        CONCLUÍDO,
         CANCELADO
     }
 }

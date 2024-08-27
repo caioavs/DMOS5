@@ -72,10 +72,10 @@ class OrderAdapter(private val context: Context, private val orders: List<Order>
     }
 
     private fun setSpinnerStatus(itemView: View, order: Order) {
-        val spinner: Spinner = itemView.findViewById(R.id.spinnerStatus)
+        val spinner: Spinner = itemView.findViewById(R.id.spStatus)
 
         val filteredStatusValues = Order.Status.values()
-            .filter { it != Order.Status.CONCLUIDO && it != Order.Status.CANCELADO }
+            .filter { it != Order.Status.CONCLUÍDO && it != Order.Status.CANCELADO }
             .map { it.name.replace("_", " ").lowercase().replaceFirstChar { char -> char.uppercase() } }
 
         val adapter = ArrayAdapter(context, R.layout.spinner_item, filteredStatusValues)
@@ -97,7 +97,7 @@ class OrderAdapter(private val context: Context, private val orders: List<Order>
             Order.Status.EM_ESPERA -> tvStatusLabel.setTextColor(ContextCompat.getColor(context, R.color.brown_lighter))
             Order.Status.EM_ANDAMENTO -> tvStatusLabel.setTextColor(ContextCompat.getColor(context, R.color.blue_light))
             Order.Status.PRONTO_PARA_RETIRADA -> tvStatusLabel.setTextColor(ContextCompat.getColor(context, R.color.yellow))
-            Order.Status.CONCLUIDO -> tvStatusLabel.setTextColor(ContextCompat.getColor(context, R.color.green))
+            Order.Status.CONCLUÍDO -> tvStatusLabel.setTextColor(ContextCompat.getColor(context, R.color.green))
             else -> tvStatusLabel.setTextColor(ContextCompat.getColor(context, R.color.red))
         }
     }
@@ -113,9 +113,12 @@ class OrderAdapter(private val context: Context, private val orders: List<Order>
     private fun setVisibility(itemView: View?, order: Order) {
         itemView?.let { view ->
             val status = view.findViewById<TextView>(R.id.tvStatus)
-            if(order.status == Order.Status.CONCLUIDO || order.status == Order.Status.CANCELADO) {
+            if(order.status == Order.Status.CONCLUÍDO || order.status == Order.Status.CANCELADO) {
+                val cardView = view.findViewById<androidx.cardview.widget.CardView>(R.id.cardView)
+                cardView.setCardBackgroundColor(ContextCompat.getColor(context, R.color.brown_strong_light))
+
                 val imageView: ImageView = view.findViewById(R.id.ImgEditOrder)
-                val spinner: Spinner = view.findViewById(R.id.spinnerStatus)
+                val spinner: Spinner = view.findViewById(R.id.spStatus)
                 val cancelOrderButton: Button = view.findViewById(R.id.btnCancelOrder)
                 val concludeOrderButton: Button = view.findViewById(R.id.btnConcludeOrder)
 
@@ -125,6 +128,12 @@ class OrderAdapter(private val context: Context, private val orders: List<Order>
                 concludeOrderButton.visibility = View.GONE
 
                 status.visibility = View.VISIBLE
+
+                if(order.status == Order.Status.CONCLUÍDO) {
+                    status.setTextColor(ContextCompat.getColor(context, R.color.green))
+                } else {
+                    status.setTextColor(ContextCompat.getColor(context, R.color.red))
+                }
             } else {
                 status.visibility = View.GONE
             }

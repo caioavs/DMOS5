@@ -18,5 +18,6 @@
         </activity>
         <activity android:name=".ui.SignUpActivity" />
         <activity android:name=".ui.HomeActivity" />
+        <activity android:name=".ui.NewOrderActivity" />
     </application>
 </manifest>
