@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:showIn="navigation_view">
+
+    <item android:id="@+id/navHome"
+          android:icon="@drawable/drawer_home"
+          android:title="Pedidos" />
+    <item android:id="@+id/navNewOrder"
+          android:icon="@drawable/drawer_new_order"
+          android:title="Novo pedido" />
+    <item android:id="@+id/navLogOut"
+          android:icon="@drawable/drawer_log_out"
+          android:title="Sair" />
+
+</menu>

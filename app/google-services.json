@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "704291986672",
+    "project_id": "dmos5-23957",
+    "storage_bucket": "dmos5-23957.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:704291986672:android:c035ee9af53c42cd013635",
+        "android_client_info": {
+          "package_name": "com.example.dmos5_projetofinal"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDlMv3BN0w3E8BS2oGD57FtGwS270OQBOo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
