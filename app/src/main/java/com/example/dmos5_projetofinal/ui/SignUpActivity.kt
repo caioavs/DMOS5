@@ -34,7 +34,7 @@ class SignUpActivity : AppCompatActivity() {
         val senha = findViewById<EditText>(R.id.etSenha).text.toString()
         val cargo = if (findViewById<RadioButton>(R.id.rbGarcom).isChecked) "Garçom" else "Cozinheiro"
 
-        if(nome.length < 3 || !validateEmail(email) || cpf.length != 11 || senha.length < 6) {
+        if (nome.length < 3 || !validateEmail(email) || cpf.length != 11 || senha.length < 6) {
             signalError(findViewById(R.id.tvHeader))
             return
         }
@@ -53,7 +53,7 @@ class SignUpActivity : AppCompatActivity() {
             // Cria o usuário com email e senha
             FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, senha)
                 .addOnCompleteListener { task ->
-                    if(task.isSuccessful) {
+                    if (task.isSuccessful) {
                         // Cria o documento do usuário no Firestore
                         val user = FirebaseAuth.getInstance().currentUser
                         val userDoc = hashMapOf(
@@ -113,5 +113,4 @@ class SignUpActivity : AppCompatActivity() {
         startActivity(intent)
         overridePendingTransition(R.transition.slide_in_left, R.transition.slide_out_right)
     }
-
 }

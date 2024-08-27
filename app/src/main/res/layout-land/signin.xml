@@ -2,115 +2,95 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
+    android:padding="46dp"
     android:background="@color/white">
 
-    <LinearLayout
-        android:orientation="vertical"
+    <TextView
+        android:id="@+id/tvHeader"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="65dp"
+        android:text="Forks"
+        android:fontFamily="@font/flux_regular"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        android:textColor="@color/black" />
 
-        <TextView
-            android:id="@+id/tvHeader"
-            android:layout_width="wrap_content"
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="35dp"
+        android:textColorHint="@color/brown_dark"
+        app:boxStrokeColor="@color/black"
+        app:hintTextColor="@color/gray_light">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etEmail"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="35dp"
-            android:text="Forks"
+            android:padding="13dp"
+            android:inputType="textEmailAddress"
+            android:hint="e-mail"
             android:fontFamily="@font/flux_regular"
-            android:textSize="35sp"
+            android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="@color/black" />
+            android:letterSpacing="0.1"
+            android:textColor="@color/brown" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="wrap_content"
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="35dp"
+        android:textColorHint="@color/brown_dark"
+        app:boxStrokeColor="@color/black"
+        app:hintTextColor="@color/gray_light">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etSenha"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="35dp">
+            android:padding="13dp"
+            android:inputType="textPassword"
+            android:hint="senha"
+            android:fontFamily="@font/flux_regular"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.1"
+            android:textColor="@color/brown" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="190dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="85dp"
-                android:textColorHint="@color/brown_dark"
-                app:boxStrokeColor="@color/black"
-                app:hintTextColor="@color/gray_light">
+    <Button
+        android:id="@+id/btnSignIn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="175dp"
+        android:padding="15dp"
+        android:background="@drawable/custom_btn"
+        android:text="Acessar"
+        android:fontFamily="@font/choplin_medium"
+        android:textSize="18sp"
+        android:letterSpacing="0.2"
+        android:textColor="@color/white"
+        app:backgroundTint="@color/black" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etEmail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="13dp"
-                    android:inputType="textEmailAddress"
-                    android:hint="e-mail"
-                    android:fontFamily="@font/flux_regular"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:letterSpacing="0.1"
-                    android:textColor="@color/brown" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <Button
-                android:id="@+id/btnSignIn"
-                android:layout_width="210dp"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:background="@drawable/custom_btn"
-                android:text="Acessar"
-                android:fontFamily="@font/choplin_medium"
-                android:textSize="18sp"
-                android:letterSpacing="0.2"
-                android:textColor="@color/white"
-                app:backgroundTint="@color/black" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="190dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="85dp"
-                android:textColorHint="@color/brown_dark"
-                app:boxStrokeColor="@color/black"
-                app:hintTextColor="@color/gray_light">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etSenha"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="13dp"
-                    android:inputType="textPassword"
-                    android:hint="senha"
-                    android:fontFamily="@font/flux_regular"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:letterSpacing="0.1"
-                    android:textColor="@color/brown" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <TextView
-                android:id="@+id/txtSignUp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/txtCadastrar"
-                android:fontFamily="@font/flux_regular"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:letterSpacing="0.2"
-                android:textColor="@color/brown_dark" />
-
-        </LinearLayout>
-
-    </LinearLayout>
+    <TextView
+        android:id="@+id/txtSignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/txtCadastrar"
+        android:fontFamily="@font/flux_regular"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:letterSpacing="0.2"
+        android:textColor="@color/brown" />
 
 </LinearLayout>

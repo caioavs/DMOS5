@@ -148,12 +148,10 @@ class NewOrderActivity : AppCompatActivity() {
         val bebidaDescricao: String = findViewById<Spinner>(R.id.spBebida).selectedItem.toString()
         val observacoes: String = findViewById<EditText>(R.id.etObservacoes).text.toString()
 
-        // Recupera os objetos Item correspondentes às descrições selecionadas
         val pratoPrincipal: Item? = ItemDataInitializer.getInitialItems().find { it.descricao == pratoPrincipalDescricao }
         val pratoAdicional: Item? = ItemDataInitializer.getInitialItems().find { it.descricao == pratoAdicionalDescricao }
         val bebida: Item? = ItemDataInitializer.getInitialItems().find { it.descricao == bebidaDescricao }
 
-        // Verifica se os itens foram encontrados antes de criar o pedido
         if (pratoPrincipal != null && pratoAdicional != null && bebida != null) {
             val order = Order(
                 pratoPrincipal = pratoPrincipal,
@@ -167,17 +165,14 @@ class NewOrderActivity : AppCompatActivity() {
             firestore.collection("orders")
                 .add(order)
                 .addOnSuccessListener {
-                    // Pedido salvo com sucesso
                     val intent = Intent(this, HomeActivity::class.java)
                     startActivity(intent)
                 }
                 .addOnFailureListener { e ->
-                    // Falha ao salvar o pedido
                     e.printStackTrace()
                 }
         } else {
             // Tratamento de erro caso algum dos itens não seja encontrado
-            // Você pode exibir uma mensagem de erro para o usuário aqui
         }
     }
 

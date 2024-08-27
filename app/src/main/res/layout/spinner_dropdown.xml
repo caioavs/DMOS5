@@ -8,3 +8,4 @@
     android:fontFamily="@font/flux_regular"
     android:textSize="18sp"
     android:textColor="@color/brown_light" />
+

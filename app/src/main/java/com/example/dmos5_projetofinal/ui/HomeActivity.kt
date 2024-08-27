@@ -66,9 +66,9 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun setNavigationView() {
-        navigationView = findViewById<NavigationView>(R.id.drawer)
+        navigationView = findViewById(R.id.drawer)
         navigationView.setNavigationItemSelectedListener { item ->
-            var intent: Intent?
+            val intent: Intent?
             when(item.itemId) {
                 R.id.navHome -> {
                     intent = Intent(this@HomeActivity, HomeActivity::class.java)
@@ -78,6 +78,7 @@ class HomeActivity : AppCompatActivity() {
                     intent = Intent(this@HomeActivity, NewOrderActivity::class.java)
                     startActivity(intent)
                 }
+                else -> return@setNavigationItemSelectedListener false
             }
             drawerLayout.closeDrawer(GravityCompat.START)
             true
@@ -123,5 +124,4 @@ class HomeActivity : AppCompatActivity() {
         val intent = Intent(this, NewOrderActivity::class.java)
         startActivity(intent)
     }
-
 }
