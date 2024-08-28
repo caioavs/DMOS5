@@ -16,7 +16,6 @@ import com.example.dmos5_projetofinal.model.Item
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.firestore.FirebaseFirestore
-import java.util.*
 
 class HomeActivity : AppCompatActivity() {
 
@@ -98,6 +97,10 @@ class HomeActivity : AppCompatActivity() {
 
         // Atualiza a interface do usuário após recuperar os pedidos
         getOrdersFromDatabase { orders ->
+            // Limpa o layout existente
+            ordersLayout.removeAllViews()
+
+            // Cria e configura o adapter com os pedidos ordenados
             val orderAdapter = OrderAdapter(this, orders, ordersLayout)
             orderAdapter.populateOrders()
         }
@@ -112,7 +115,18 @@ class HomeActivity : AppCompatActivity() {
                         id = document.id // Define o ID do documento no objeto Order
                     }
                 }
-                onOrdersLoaded(orders)
+
+                // Filtra e ordena os pedidos
+                val sortedOrders = orders
+                    .filter { it.status != Order.Status.CANCELADO } // Filtra os pedidos CANCELADOS
+                    .sortedWith(
+                        compareBy(
+                            { it.status == Order.Status.CONCLUÍDO },  // Coloca os pedidos CONCLUÍDOS por último
+                            { it.dt }                        // Ordena por data para pedidos não concluídos
+                        )
+                    )
+
+                onOrdersLoaded(sortedOrders)
             }
             .addOnFailureListener { exception ->
                 exception.printStackTrace()
@@ -123,5 +137,10 @@ class HomeActivity : AppCompatActivity() {
     private fun newOrder() {
         val intent = Intent(this, NewOrderActivity::class.java)
         startActivity(intent)
+    }
+
+    // Método para atualizar a lista após cancelamento
+    private fun refreshOrderList() {
+        setAdapter() // Chama o método que atualiza e ordena a lista
     }
 }

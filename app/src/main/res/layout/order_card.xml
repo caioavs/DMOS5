@@ -22,38 +22,46 @@
             android:layout_height="wrap_content"
             android:padding="28dp">
 
-            <RelativeLayout
+            <!-- Layout para o ID e Data -->
+            <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp">
 
-                <TextView
-                    android:id="@+id/tvId"
+                <LinearLayout
+                    android:orientation="vertical"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="#"
-                    android:textSize="13sp"
-                    android:textColor="@color/brown_light" />
+                    android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/tvDt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:text="  •  "
-                    android:textSize="13sp"
-                    android:textColor="@color/brown_light" />
+                    <TextView
+                        android:id="@+id/tvId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="#"
+                        android:textSize="13sp"
+                        android:textColor="@color/brown_light" />
+
+                    <TextView
+                        android:id="@+id/tvDt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Data do Pedido"
+                        android:textSize="13sp"
+                        android:textColor="@color/brown_light" />
+
+                </LinearLayout>
 
                 <ImageView
                     android:id="@+id/ImgEditOrder"
                     android:clickable="true"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:layout_alignParentEnd="true"
+                    android:layout_gravity="end"
+                    android:layout_weight="1"
                     android:src="@drawable/btn_edit_order" />
 
-            </RelativeLayout>
+            </LinearLayout>
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -71,50 +79,50 @@
                     android:textStyle="bold" />
 
                 <TextView
-                        android:id="@+id/tvPratoPrincipal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Placeholder"
-                        android:fontFamily="@font/flux_regular"
-                        android:textSize="25sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/yellow_orange" />
+                    android:id="@+id/tvPratoPrincipal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Placeholder"
+                    android:fontFamily="@font/flux_regular"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/yellow_orange" />
 
             </LinearLayout>
 
             <TextView
-                    android:id="@+id/tvPratoAdicional"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="25dp"
-                    android:padding="10dp"
-                    android:background="@drawable/custom_bg"
-                    android:text="Placeholder"
-                    android:fontFamily="@font/flux_regular"
-                    android:textSize="20sp"
-                    android:textColor="@color/beige" />
+                android:id="@+id/tvPratoAdicional"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="25dp"
+                android:padding="10dp"
+                android:background="@drawable/custom_bg"
+                android:text="Placeholder"
+                android:fontFamily="@font/flux_regular"
+                android:textSize="20sp"
+                android:textColor="@color/beige" />
 
             <TextView
-                    android:id="@+id/tvBebida"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="30dp"
-                    android:padding="10dp"
-                    android:background="@drawable/custom_bg_alt"
-                    android:text="Placeholder"
-                    android:fontFamily="@font/flux_regular"
-                    android:textSize="20sp"
-                    android:textColor="@color/brown_strong" />
+                android:id="@+id/tvBebida"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:padding="10dp"
+                android:background="@drawable/custom_bg_alt"
+                android:text="Placeholder"
+                android:fontFamily="@font/flux_regular"
+                android:textSize="20sp"
+                android:textColor="@color/brown_strong" />
 
             <TextView
-                    android:id="@+id/tvObservacoes"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Placeholder"
-                    android:fontFamily="@font/flux_regular"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/brown_light" />
+                android:id="@+id/tvObservacoes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Placeholder"
+                android:fontFamily="@font/flux_regular"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/brown_light" />
 
             <TextView
                 android:id="@+id/tvStatus"
